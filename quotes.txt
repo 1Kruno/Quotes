@@ -1,0 +1,49 @@
+  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+
+        File outFile;
+        FileWriter fw;
+        BufferedWriter bw;
+
+        String quote = txtsubmit.getText();
+
+        try {
+            outFile = new File("quotes.txt");
+            fw = new FileWriter(outFile, true);
+            bw = new BufferedWriter(fw);
+
+            bw.write(quote);
+            bw.newLine();
+            bw.close();
+            JOptionPane.showMessageDialog(null, "Quote added");
+        } catch (IOException x) {
+            System.out.println("Error " + x);
+        }
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        try{
+        FileInputStream fs = new FileInputStream("quotes.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(fs));
+        
+        ArrayList<String> array = new ArrayList<>();
+        
+        String line;
+        
+        while ((line = br.readLine()) != null) {
+            array.add(line);
+        }
+// variable so that it is not re-seeded every call.
+        Random rand = new Random();
+
+// nextInt is exclusive. Should be good with output for array.
+        int randomIndex = rand.nextInt(array.size());
+
+// Print your random quote... 
+        JOptionPane.showMessageDialog(null,array.get(randomIndex));
+        }
+        catch(IOException y){
+            System.out.println("error" + y);
+        }
+    }                                        
